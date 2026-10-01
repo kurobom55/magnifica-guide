@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="デロンギ マグニフィカS（ECAM22112）のランプの意味・困ったとき・お手入れを図でまとめた非公式ガイド">
+<meta name="theme-color" content="#4A2C1D">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="お助け帳">
+<style>html{-webkit-text-size-adjust:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
+<title>マグニフィカS お助け帳</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Dela+Gothic+One&display=swap">
+<style>
+/* Layout: one column, big tap targets; tabs across the top, content below; diagrams beside instructions */
+:root{
+  --bg:#EDF0F1; --surface:#FFFFFF; --ink:#1D2224; --muted:#5B6568; --line:#CDD4D6;
+  --brew:#4A2C1D; --brew-soft:#EFE4DC; --onbrew:#FFFFFF;
+  --amber:#D99100; --red:#C9302C; --blue:#2B78B0; --ok:#2E7D4F;
+  --mach:#2A2F31; --mach-line:#8A9497; --hl:#E8A317;
+  --f-display:"Dela Gothic One","Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141718; --surface:#1E2224; --ink:#ECEFF0; --muted:#A3ADB0; --line:#353C3F;
+  --brew:#D9A57E; --brew-soft:#3A2A21; --onbrew:#1B1210;
+  --amber:#F2B233; --red:#F0625C; --blue:#6DB3E6; --ok:#6CCB93;
+  --mach:#0C0E0F; --mach-line:#6C777A; --hl:#F2B233; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141718; --surface:#1E2224; --ink:#ECEFF0; --muted:#A3ADB0; --line:#353C3F;
+  --brew:#D9A57E; --brew-soft:#3A2A21; --onbrew:#1B1210;
+  --amber:#F2B233; --red:#F0625C; --blue:#6DB3E6; --ok:#6CCB93;
+  --mach:#0C0E0F; --mach-line:#6C777A; --hl:#F2B233; color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.7;font-weight:500}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:18px 60px}
+h1{font-family:var(--f-display);font-weight:400;font-size:1.75rem;line-height:1.25;margin:0;letter-spacing:.02em;text-wrap:balance}
+h2{font-size:1.3rem;margin:0 0 .4rem;font-weight:900;text-wrap:balance}
+h3{font-size:1.1rem;margin:0;font-weight:700}
+p{margin:0}
+.head{display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
+.head .model{font-size:.85rem;color:var(--muted);letter-spacing:.08em}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding-block:8px}
+.tab{appearance:none;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;font:inherit;font-weight:700;font-size:1rem;padding:10px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;min-height:64px}
+.tab svg{width:26px;height:26px}
+.tab[aria-selected="true"]{background:var(--brew);border-color:var(--brew);color:var(--onbrew)}
+.tab:focus-visible,button:focus-visible,summary:focus-visible,textarea:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+section[role="tabpanel"]{display:flex;flex-direction:column;gap:16px;margin-top:10px}
+.lead{color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+
+/* Lamps */
+.pats{display:flex;flex-direction:column;gap:10px}
+details.pat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+details.pat[open]{border:2px solid var(--brew)}
+details.pat summary{list-style:none;cursor:pointer;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-height:56px}
+details.pat summary::-webkit-details-marker{display:none}
+.icons{display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}
+.plus{font-weight:900;color:var(--amber);font-size:1.3rem;align-self:center;margin-top:-18px}
+.ic{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.8rem;font-weight:700;color:var(--muted);width:62px}
+.tile{width:54px;height:54px;border-radius:12px;background:#E4E7E8;display:grid;place-items:center;border:3px solid transparent}
+.tile svg{width:38px;height:38px}
+.ic.on .tile{border-color:var(--amber);box-shadow:0 0 0 3px color-mix(in srgb,var(--amber) 30%,transparent)}
+.ic.blink .tile{border-color:var(--amber);box-shadow:0 0 0 3px color-mix(in srgb,var(--amber) 30%,transparent);animation:ring 1s steps(1) infinite}
+@keyframes ring{50%{border-color:transparent;box-shadow:none;background:#B9C0C3}}
+.ic.blink span{color:var(--amber)}
+.pwhat{font-weight:700;font-size:1.05rem;line-height:1.45;display:flex;justify-content:space-between;gap:10px}
+.pwhat::after{content:"＋";color:var(--brew);font-weight:900;flex:none}
+details.pat[open] .pwhat::after{content:"－"}
+.pbody{padding:0 14px 14px;display:flex;flex-direction:column;gap:10px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.legend .ic{flex-direction:row;width:auto;gap:6px}
+.legend .tile{width:30px;height:30px;border-radius:8px}
+@keyframes blink{50%{opacity:.1}}
+@keyframes glow{0%,100%{opacity:1}50%{opacity:.15}}
+.result{border-left:6px solid var(--brew);background:var(--surface);border-radius:0 var(--r) var(--r) 0;padding:16px;display:flex;flex-direction:column;gap:10px}
+.result .what{font-size:1.15rem;font-weight:900}
+.cause{display:flex;flex-direction:column;gap:4px;padding-block:10px;border-top:1px dashed var(--line)}
+.cause:first-of-type{border-top:0;padding-top:0}
+.cause .when{font-size:.9rem;color:var(--muted)}
+.do{font-weight:700}
+.pg{font-size:.8rem;color:var(--muted);white-space:nowrap}
+.jump{appearance:none;font:inherit;font-weight:700;font-size:.95rem;align-self:flex-start;border:2px solid var(--brew);color:var(--brew);background:transparent;border-radius:10px;padding:6px 12px;cursor:pointer;min-height:44px}
+
+/* Symptoms */
+details.sym{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+details.sym summary{list-style:none;cursor:pointer;padding:14px 16px;font-weight:700;font-size:1.05rem;display:flex;justify-content:space-between;gap:10px;align-items:center;min-height:56px}
+details.sym summary::-webkit-details-marker{display:none}
+details.sym summary::after{content:"＋";color:var(--brew);font-weight:900;flex:none}
+details.sym[open] summary::after{content:"－"}
+details.sym .body{padding:0 16px 14px;display:flex;flex-direction:column;gap:0}
+.grp{font-size:.85rem;color:var(--muted);letter-spacing:.08em;margin-top:6px}
+
+/* Guides */
+.glist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gbtn{appearance:none;font:inherit;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;cursor:pointer;display:flex;flex-direction:column;gap:2px;min-height:84px}
+.gbtn b{font-size:1.05rem;line-height:1.35}
+.gbtn span{font-size:.85rem;color:var(--muted)}
+.gbtn .freq{display:inline-block;align-self:flex-start;font-size:.75rem;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--brew-soft);color:var(--brew);letter-spacing:.04em}
+.gbtn[aria-pressed="true"]{border:2px solid var(--brew)}
+.viewer{background:var(--surface);border:2px solid var(--brew);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:14px}
+.vtop{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.count{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700}
+.progress{display:flex;gap:4px}
+.progress i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.progress i.on{background:var(--brew)}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px;align-items:center}
+.fig{background:var(--bg);border-radius:12px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.fig svg{width:100%;max-width:280px;height:auto}
+.fig .cap{font-size:.9rem;font-weight:700;color:var(--brew);text-align:center}
+.stext{font-size:1.2rem;font-weight:700;line-height:1.6}
+.note{font-size:.95rem;background:var(--brew-soft);border-radius:10px;padding:8px 12px;margin-top:10px;font-weight:500}
+.note.warn{background:transparent;border:2px solid var(--red);color:var(--ink)}
+.nav{display:grid;grid-template-columns:1fr 1.4fr;gap:10px}
+.nbtn{appearance:none;font:inherit;font-weight:900;font-size:1.1rem;border-radius:12px;padding:14px;min-height:60px;cursor:pointer;border:2px solid var(--brew);background:transparent;color:var(--brew)}
+.nbtn.pri{background:var(--brew);color:var(--onbrew)}
+.nbtn:disabled{opacity:.35;cursor:default}
+
+/* SVG machine */
+.m-body{fill:var(--mach);stroke:var(--mach-line);stroke-width:2}
+.m-part{fill:var(--mach);stroke:var(--mach-line);stroke-width:2}
+.m-panel{fill:#C9CED0;stroke:var(--mach-line);stroke-width:1.5}
+.m-btn{fill:var(--mach)}
+.m-faint{fill:none;stroke:var(--mach-line);stroke-width:1.5;stroke-dasharray:4 4}
+.m-hl{fill:var(--hl);stroke:var(--hl);stroke-width:3;animation:glow 1.4s ease-in-out infinite}
+.m-arrow{fill:none;stroke:var(--red);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.m-arrowhead{fill:var(--red)}
+.m-txt{fill:var(--ink);font:700 13px var(--f-body)}
+.p-face{fill:#E4E7E8;stroke:var(--mach-line);stroke-width:2}
+.p-btn{fill:#2A2F31}
+.p-lbl{fill:#2A2F31;font:700 11px var(--f-body)}
+.p-dial{fill:#F7F8F8;stroke:#2A2F31;stroke-width:1.5}
+
+/* PDF */
+a.pglink{color:var(--brew);font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.pdfcard{display:flex;flex-direction:column;gap:10px}
+.setlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.setlist a{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-decoration:none;color:var(--ink);background:var(--bg);min-height:64px}
+.setlist a b{font-size:1rem}
+.setlist a span{font-size:.85rem;color:var(--brew);font-weight:700}
+.pdfstate{font-size:.95rem}
+.pdfstate.ok{color:var(--ok);font-weight:700}
+.filebtn{display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--brew);color:var(--brew);border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;min-height:52px}
+#pdfFile{position:absolute;width:1px;height:1px;opacity:0}
+.pv{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column}
+.pvbar{display:flex;gap:6px;align-items:center;padding:10px 12px;padding-top:calc(10px + env(safe-area-inset-top,0px));border-bottom:1px solid var(--line);background:var(--surface);flex-wrap:wrap}
+.pvbar .nbtn{min-height:48px;padding:6px 12px;font-size:1rem;flex:none}
+.pvbar .pno{font-weight:900;font-variant-numeric:tabular-nums;min-width:4.6em;text-align:center;font-size:.95rem}
+.pvmsg:empty{display:none}
+.pvscroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+.pvscroll canvas{display:block;margin:0 auto;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.2);max-width:none}
+.pvmsg{padding:20px;text-align:center;color:var(--muted)}
+
+/* AI */
+.chat{display:flex;flex-direction:column;gap:12px}
+.msg{padding:12px 14px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;max-width:92%}
+.msg.me{align-self:flex-end;background:var(--brew);color:var(--onbrew);border-bottom-right-radius:4px}
+.msg.ai{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg.ai.wait{color:var(--muted)}
+.msg img{display:block;max-width:180px;border-radius:8px;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{appearance:none;font:inherit;font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:8px 14px;cursor:pointer;min-height:44px}
+.composer{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+textarea{font:inherit;font-size:1.05rem;width:100%;min-height:90px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--bg);color:var(--ink);resize:vertical}
+.crow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.crow .nbtn{flex:1;min-width:120px}
+.photo{display:flex;align-items:center;gap:8px;font-size:.95rem}
+.photo label{border:2px dashed var(--brew);color:var(--brew);border-radius:10px;padding:8px 12px;cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
+.photo input{position:absolute;width:1px;height:1px;opacity:0}
+.fine{font-size:.85rem;color:var(--muted)}
+.support{display:flex;flex-direction:column;gap:2px}
+.tel{font-size:1.4rem;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.03em;user-select:all}
+footer{margin-top:28px;font-size:.85rem;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+
+@media (max-width:560px){
+  .stage{grid-template-columns:1fr}
+  .tab{font-size:.9rem}
+  h1{font-size:1.5rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .ic.blink .tile,.m-hl{animation:none}
+  .ic.blink .tile{border-style:dashed}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="head">
+    <span class="model">デロンギ 全自動コーヒーマシン ECAM22112</span>
+    <h1>マグニフィカS お助け帳</h1>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="メニュー">
+    <button class="tab" role="tab" id="t-lamp" aria-controls="p-lamp" aria-selected="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="5"/><path d="M9 18h6M10 21h4M12 1v2M3 10H1M23 10h-2M5 3l1.5 1.5M19 3l-1.5 1.5"/></svg>ランプ</button>
+    <button class="tab" role="tab" id="t-sym" aria-controls="p-sym" aria-selected="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.5"/></svg>困った</button>
+    <button class="tab" role="tab" id="t-care" aria-controls="p-care" aria-selected="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20l7-7M14 4l6 6-5 5-6-6zM3 21l2-5 3 3z"/></svg>お手入れ</button>
+    <button class="tab" role="tab" id="t-ai" aria-controls="p-ai" aria-selected="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h.01M12 10h.01M16 10h.01" stroke-linecap="round" stroke-width="3"/></svg>AIに聞く</button>
+  </nav>
+
+  <!-- ランプ -->
+  <section role="tabpanel" id="p-lamp" aria-labelledby="t-lamp">
+    <div>
+      <h2>どのマークが光っていますか？</h2>
+      <p class="lead">マークの組み合わせで意味が変わります。本体と同じ光り方のものを押してください。</p>
+    </div>
+    <div class="legend" aria-hidden="true">
+      <span class="ic on"><span class="tile"></span>ずっとついている＝点灯</span>
+      <span class="ic blink"><span class="tile"></span>チカチカ＝点滅</span>
+    </div>
+    <div class="pats" id="pats"></div>
+    <p class="fine">マークの組み合わせは、機械に付いていた別紙のクイックガイド（ディスプレイアイコン表示）によります。除石灰ランプは他のマークとは別の知らせなので、いっしょに光っていたら、それぞれ見てください。</p>
+  </section>
+
+  <!-- 症状 -->
+  <section role="tabpanel" id="p-sym" aria-labelledby="t-sym" hidden>
+    <div>
+      <h2>どんなことで困っていますか？</h2>
+      <p class="lead">あてはまるものを押すと、考えられる原因と直し方が出ます。上から順に試してください。</p>
+    </div>
+    <div id="syms" style="display:flex;flex-direction:column;gap:10px"></div>
+  </section>
+
+  <!-- お手入れ -->
+  <section role="tabpanel" id="p-care" aria-labelledby="t-care" hidden>
+    <div>
+      <h2>お手入れと調整</h2>
+      <p class="lead">やりたいことを選ぶと、図つきで1つずつ案内します。</p>
+    </div>
+    <div class="glist" id="glist"></div>
+    <div class="viewer" id="viewer" hidden></div>
+    <div class="card pdfcard">
+      <h3>細かい設定は説明書で</h3>
+      <p class="fine">ボタンの押し方とランプの見え方は説明書の図が一番わかりやすいので、そのページを開きます。</p>
+      <div class="setlist">
+        <a class="pglink" data-page="26" href="#"><b>1杯の量・水の硬さ</b><span>p.26 を開く</span></a>
+        <a class="pglink" data-page="27" href="#"><b>抽出温度・お湯を出す</b><span>p.27 を開く</span></a>
+        <a class="pglink" data-page="28" href="#"><b>自動電源オフ・内部洗浄</b><span>p.28 を開く</span></a>
+        <a class="pglink" data-page="29" href="#"><b>節電モード・挽き目</b><span>p.29 を開く</span></a>
+      </div>
+    </div>
+    <div class="card pdfcard" id="pdfSetup">
+      <h3>説明書PDFをこのスマホに入れる（任意）</h3>
+      <p class="fine">入れておくと、ページ番号を押したときに、このアプリの中でそのページをすぐ表示します（電波がなくても見られます）。入れない場合は、メーカー公式サイトのPDFが開きます。iPhoneのSafariでは、公式PDFだと目的のページまで自動で飛ばないことがあります。</p>
+      <p class="fine">PDFは<a href="https://dls.delonghigroup.com/files/pdfmanuals/JP-57132C9004.pdf" target="_blank" rel="noopener">デロンギ公式サイト</a>から「ファイル」アプリに保存してから、下のボタンで選んでください。PDFはこのスマホの中だけに保存され、どこにも送られません。</p>
+      <p class="pdfstate" id="pdfState">まだ入っていません</p>
+      <div class="crow">
+        <label class="filebtn" for="pdfFile">PDFを選ぶ</label>
+        <input type="file" id="pdfFile" accept="application/pdf,.pdf">
+        <button type="button" class="nbtn" id="pdfRemove" hidden>取り除く</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI -->
+  <section role="tabpanel" id="p-ai" aria-labelledby="t-ai" hidden>
+    <div>
+      <h2>AIに聞く</h2>
+      <p class="lead">困っていることを、ふだんの言葉で書いてください。この機械の説明書の内容をもとに答えます。</p>
+    </div>
+    <div id="aiOff" class="composer" hidden>
+      <p><b>AIアプリを使って聞く方法</b></p>
+      <p class="fine">このページから直接AIにはつながりません。下のボタンで「この機械の資料つきの質問文」をコピーし、ClaudeやChatGPTなど、ふだん使っているAIアプリに貼り付けて送ってください。写真はAIアプリの方で添付できます。</p>
+      <label for="q2" class="fine">困っていること</label>
+      <textarea id="q2" placeholder="例：カス受けマークと警告マークがチカチカしている"></textarea>
+      <div class="crow">
+        <button type="button" class="nbtn pri" id="copyAsk">質問文をコピー</button>
+        <a class="nbtn" id="openClaude" href="https://claude.ai/new" target="_blank" rel="noopener" style="text-align:center;text-decoration:none">Claudeを開く</a>
+      </div>
+      <p class="fine" id="copyMsg" aria-live="polite"></p>
+      <textarea id="copyBox" readonly hidden style="min-height:140px"></textarea>
+    </div>
+    <div id="aiOn">
+      <div class="chat" id="chat"></div>
+      <div class="chips" id="chips" style="margin-block:12px"></div>
+      <form class="composer" id="composer">
+        <label for="q" class="fine">質問を入力</label>
+        <textarea id="q" placeholder="例：赤いランプがつきっぱなしで、コーヒーが出ない"></textarea>
+        <div class="photo" id="photoRow" hidden>
+          <label for="pic">📷 写真をつける</label>
+          <input type="file" id="pic" accept="image/*">
+          <span id="picName" class="fine"></span>
+        </div>
+        <div class="crow">
+          <button type="submit" class="nbtn pri" id="send">送る</button>
+          <button type="button" class="nbtn" id="stop" hidden>止める</button>
+          <button type="button" class="nbtn" id="reset">最初から</button>
+        </div>
+        <p class="fine">はじめて送るときに、AIの利用を許可するか確認が出ます。AIの答えは間違うこともあります。熱湯や電気に関わることは、無理をせずサポートセンターへ。</p>
+      </form>
+    </div>
+  </section>
+
+  <div class="card support" style="margin-top:20px">
+    <h3>それでも直らないときは</h3>
+    <p>デロンギ お客様サポートセンター</p>
+    <p class="tel">0120-804-280</p>
+    <p class="fine">土日祝を除く 9:30〜18:00（説明書 p.42 の記載）</p>
+  </div>
+
+  <footer>
+    <p>このページは個人が作った非公式のまとめで、デロンギ・ジャパン株式会社とは関係ありません。製品名は製品を示すためだけに使っています。説明書の内容を自分の言葉で要約したもので、図は簡略化したイメージです。正確な情報は付属の取扱説明書（ページ番号を併記）でご確認ください。内容の誤りによる故障やけがについて責任は負えません。熱湯・電気に関わる作業は無理をせず、メーカーのサポートにご相談ください。</p>
+  </footer>
+</div>
+<div class="pv" id="pv" hidden role="dialog" aria-label="説明書のページ">
+  <div class="pvbar">
+    <button type="button" class="nbtn pri" id="pvClose">戻る</button>
+    <button type="button" class="nbtn" id="pvPrev" aria-label="前のページ">‹</button>
+    <span class="pno" id="pvNo"></span>
+    <button type="button" class="nbtn" id="pvNext" aria-label="次のページ">›</button>
+    <button type="button" class="nbtn" id="pvOut" aria-label="小さく">－</button>
+    <button type="button" class="nbtn" id="pvIn" aria-label="大きく">＋</button>
+  </div>
+  <div class="pvscroll" id="pvScroll"><div class="pvmsg" id="pvMsg"></div><canvas id="pvCanvas"></canvas></div>
+</div>
+
+<script>
+/* ===== 説明書からまとめた内容（自分の言葉で要約） ===== */
+const ICONS = {
+  W:{name:"給水マーク", svg:'<g transform="rotate(38 23 20)"><path d="M15 9h15v17a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3z" fill="none" stroke="#2A2F31" stroke-width="3" stroke-linejoin="round"/><path d="M15 12l-5-4" stroke="#2A2F31" stroke-width="3" stroke-linecap="round"/></g><path d="M9 31c-2 3-2 5 0 6 2-1 2-3 0-6z" fill="#2A2F31"/>'},
+  G:{name:"カス受けマーク", svg:'<path d="M9 9v20a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V9" fill="none" stroke="#2A2F31" stroke-width="3" stroke-linecap="round"/>'+[19,24,29].map(y=>[14,18,22,26,30].map(x=>`<circle cx="${x}" cy="${y}" r="1.7" fill="#2A2F31"/>`).join("")).join("")},
+  A:{name:"警告マーク", svg:'<path d="M22 7L38 36H6z" fill="none" stroke="#2A2F31" stroke-width="3" stroke-linejoin="round"/><path d="M22 17v9M22 30.5v.5" stroke="#2A2F31" stroke-width="3.5" stroke-linecap="round"/>'},
+  D:{name:"除石灰ランプ", svg:'<circle cx="22" cy="22" r="11" fill="none" stroke="#2A2F31" stroke-width="2.6"/><circle cx="18" cy="20" r="2.3" fill="#2A2F31"/><circle cx="25.5" cy="18" r="2" fill="#2A2F31"/><circle cx="23" cy="26" r="2.5" fill="#2A2F31"/><path d="M8 13a16 16 0 0 1 6-6" fill="none" stroke="#2A2F31" stroke-width="2.6" stroke-linecap="round"/><path d="M5 10l3 4 4-2" fill="none" stroke="#2A2F31" stroke-width="2.4" stroke-linejoin="round"/>'}
+};
+const SRC="別紙ガイド・p.38";
+const PATTERNS = [
+  {k:[["W","blink"]], what:"水タンクの水が足りません", causes:[
+    {do:"水タンクに水を入れて、奥までしっかり戻してください。",p:SRC},
+    {when:"石灰除去の途中なら",do:"故障ではありません。手順の続き（すすぎ）に進んでください。",guide:"descale",p:"p.36"}]},
+  {k:[["W","on"]], what:"水タンクがきちんと入っていません", causes:[
+    {do:"水タンクを奥まで、しっかり押し込んでください。",note:"それでも消えないときは、タンク背面の上にある出っぱりが欠けていないか見てください。",p:SRC}]},
+  {k:[["G","blink"]], what:"カス受けがいっぱいです", causes:[
+    {do:"カスを捨ててください。見た目がいっぱいでなくても、点滅したら必ず捨てます。",guide:"grounds",p:SRC},
+    {when:"捨てたのに消えないときは",do:"カス受けを外したまま10秒ほど待ってから戻してください。すぐ戻すと消えません。",p:"p.39"},
+    {when:"電源を入れた直後に点滅するときは",do:"前回の掃除のあと最初の1杯から約72時間たった合図です（衛生のため）。カス受けを掃除してください。",p:"p.40"}]},
+  {k:[["G","on"]], what:"カス受けがきちんと入っていません", causes:[
+    {do:"トレイとカス受けを、正しい位置まで押し込んでください。",note:"消えないときは、カス受け背面の下にある出っぱりが欠けていないか見てください。",p:SRC}]},
+  {k:[["G","on"],["A","blink"]], what:"豆ホッパーに豆がありません", causes:[
+    {do:"豆ホッパーにコーヒー豆を入れてください。",p:SRC},
+    {when:"豆は入っているのに",do:"油の多い豆がホッパーに張りついて落ちていないことがあります。ホッパーの中を乾いた布でふいてください。",p:"p.40"}]},
+  {k:[["G","blink"],["A","blink"]], what:"豆の量が多すぎます", causes:[
+    {do:"豆量つまみをMIN寄り（反時計回り）に回して、豆の量を少なくしてください。",p:SRC}]},
+  {k:[["G","blink"],["A","on"]], what:"粉コーヒーのモードなのに、粉が入っていません", causes:[
+    {do:"粉で淹れるなら、粉の投入口に粉を入れてください（計量スプーン山盛り1杯まで）。",p:SRC},
+    {when:"豆で淹れたいのに",do:"豆量つまみがMINより先（スプーンの印）まで回っています。MIN〜MAXの間に戻してからボタンを押してください。",p:"p.38"}]},
+  {k:[["A","blink"]], what:"抽出ユニットが入っていません", causes:[
+    {do:"抽出ユニットを、カチッと音がするまで正しく入れてください。",guide:"unit",p:SRC}]},
+  {k:[["G","blink"],["W","on"],["A","blink"]], what:"豆の挽きが細かすぎて、出が遅くなっています", causes:[
+    {do:"グラインダーノブを粗い方（時計回り）へ1目盛り回してください。豆を挽いている最中に回します。",guide:"grind",p:SRC}]},
+  {k:[["A","on"]], what:"抽出ユニットがうまく動いていません", causes:[
+    {do:"背面の主電源スイッチを切り、5秒ほど待ってから入れ直してください。",p:SRC},
+    {when:"それでも消えないとき",do:"抽出ユニットを取り出して、入れ直してください。",guide:"unit",p:SRC},
+    {when:"説明書p.38には、警告マークがつく原因として次ものっています",do:"粉の投入口の詰まり（ブラシで掃除）、粉の入れすぎ、水の通り道の空気（大きな音がする→空気抜き）。",guide:"air",p:"p.38"}]},
+  {k:[["D","blink"]], what:"石灰除去（中の水あか取り）の時期です。故障ではありません", causes:[
+    {do:"機械の中にたまった石灰（水道水のミネラル分、いわゆる水あか・カルキ汚れ）を掃除してほしい合図です。石灰除去をしてください。約30分かかります。",guide:"descale",p:"p.36"},
+    {when:"どのくらいの間隔で点く？",do:"水の硬さの設定と使う量で変わります。硬い水ほど早く点きます。目安は数か月に一度ですが、ランプが点いた時にやれば大丈夫です。",p:"p.14・p.37"},
+    {when:"除石灰剤が手元にないとき",do:"購入時に付属していた除石灰剤がなければ、デロンギ純正の除石灰剤を買ってください。家電量販店や通販、デロンギのオンラインショップで買えます（2個入り DLSC200／500mLボトル DLSC500）。",p:"p.41"},
+    {when:"石灰除去をしたのに点滅が消えない",do:"すすぎが最後まで終わっていなかった可能性があります。水だけで、もう一度手順どおりに行ってください。",guide:"descale",p:"p.40"}]},
+  {k:[["D","on"]], what:"石灰除去を実行中です", causes:[
+    {do:"石灰除去の途中なら、そのまま手順どおりに進めてください。",guide:"descale",p:"p.36"}]}
+];
+
+const SYMPTOMS = [
+  {g:"コーヒー", t:"コーヒーがぬるい", c:[
+    {do:"エスプレッソは67〜70℃くらいが適温で、ドリップより低めに感じるのはふつうです。",p:"p.39"},
+    {when:"カップが冷たい",do:"先にお湯を出してカップを温めてください。",p:"p.27"},
+    {when:"電源を入れてすぐ",do:"手動の内部洗浄をして、機械の中を温めてください。",p:"p.28"},
+    {when:"それでもぬるい",do:"抽出温度の設定をレベル3か4に上げてください（手順は説明書 p.27）。",p:"p.27"}]},
+  {g:"コーヒー", t:"泡（クレマ）が少ない・薄い", c:[
+    {do:"挽きを細かく（反時計回りに1目盛り）してください。",guide:"grind",p:"p.29"},
+    {do:"新しい、エスプレッソ用の豆を使ってください。",p:"p.39"},
+    {when:"粉コーヒーのとき",do:"粉を少し増やしてください（最大で計量スプーン山盛り1杯）。",p:"p.39"}]},
+  {g:"コーヒー", t:"ポタポタとしか出ない", c:[
+    {do:"抽出口や抽出ユニットが詰まっているかもしれません。掃除してください。",guide:"unit",p:"p.32〜34"},
+    {do:"豆量つまみをMIN寄り（反時計回り）に回してください。",p:"p.18"},
+    {do:"挽きを粗く（時計回りに1目盛り）してください。",guide:"grind",p:"p.29"}]},
+  {g:"コーヒー", t:"コーヒーが出ない", c:[
+    {when:"粉コーヒーのとき",do:"粉の量を減らしてください。",p:"p.39"},
+    {when:"電源が切れている時に粉を入れた",do:"中に粉が散らばっています。本体内部と抽出ユニットを掃除してから淹れ直してください。",guide:"unit",p:"p.39"},
+    {when:"大きな音がする",do:"空気抜きをしてください。",guide:"air",p:"p.27"}]},
+  {g:"コーヒー", t:"左右の出る量がちがう", c:[
+    {do:"片方の抽出口が詰まっています。固くしぼった布でふき、詰まった穴はつまようじで取ってください。",note:"抽出口は水洗いできません。",p:"p.32"},
+    {do:"本体が傾いていないか確かめ、水平な場所に置いてください。",p:"p.39"}]},
+  {g:"コーヒー", t:"豆が引き込まれない", c:[
+    {do:"油の多い豆だと、ホッパーに張りつくことがあります。ホッパーの中を乾いた布でふいてください。",p:"p.40"}]},
+  {g:"コーヒー", t:"淹れている時にトレイに水がたまる", c:[
+    {do:"中で水漏れしている可能性があります。サポートセンターに連絡してください。",p:"p.39"}]},
+  {g:"コーヒー", t:"カフェ・ジャポーネの時に音がする", c:[
+    {do:"カフェ・ジャポーネは、ハンドドリップのように「蒸らし→抽出」を3回くり返して淹れます。途中で止まったり音がしたりするのはそのためで、故障ではありません。",p:"p.6・p.39"}]},
+  {g:"ミルク・スチーム", t:"スチームが出ない", c:[
+    {do:"水タンクに水があるか見てください。",p:"p.39"},
+    {when:"スチームボタンを押してから時間がたった",do:"30秒以上たつと出ません。もう一度スチームボタンを押し、スチームのランプが点滅してからノブを「I」へ回してください。",p:"p.20"},
+    {do:"スチームの穴が詰まっています。ミルクフロッサーを掃除してください。",guide:"frother",p:"p.31"}]},
+  {g:"ミルク・スチーム", t:"スチームが水っぽい", c:[
+    {do:"予熱が終わる前に出しています。スチームのランプが点滅に変わってから出してください。",p:"p.39"}]},
+  {g:"ミルク・スチーム", t:"スチームが急に止まった", c:[
+    {do:"3分続けて出すと、安全のため自動で止まります。ノブを「〇」に戻してください。",p:"p.39"},
+    {do:"水タンクが空になっていないか見てください。",p:"p.39"}]},
+  {g:"ミルク・スチーム", t:"ミルクがうまく泡立たない", c:[
+    {do:"よく冷えた新しい牛乳（成分無調整、乳脂肪3.0%以上）を使ってください。",p:"p.40"},
+    {do:"口が小さめで深い、金属製のミルクジャグを使ってください。",p:"p.40"},
+    {do:"フロッサーの穴が詰まっていないか掃除してください。",guide:"frother",p:"p.31"},
+    {do:"それでもだめなら、中のOリング（ゴム輪）の傷みが考えられます。サポートセンターへ。",p:"p.40"}]},
+  {g:"電源・その他", t:"電源が入らない", c:[
+    {do:"コンセントにプラグが入っているか見てください。",p:"p.40"},
+    {do:"本体の背面にある主電源スイッチを「入」にしてください。",p:"p.40"}]},
+  {g:"電源・その他", t:"電源を入れるとランプが点滅したまま", c:[
+    {do:"スチームノブが「I」になっています。「〇」に戻してください。",p:"p.40"},
+    {when:"カス受けマークが点滅しているなら",do:"掃除後最初の1杯から約72時間たった合図です。カス受けを掃除してください。",guide:"grounds",p:"p.40"}]},
+  {g:"電源・その他", t:"抽出ユニットが外れない", c:[
+    {do:"電源が入っていると外せません。電源ボタンで電源を切ってから外してください。無理に引っぱると壊れます。",guide:"unit",p:"p.40"}]}
+];
+
+/* 図のパーツ：front=本体正面図 / panel=操作パネル図 */
+const GUIDES = [
+  {id:"grounds", freq:"毎日", t:"カス受けを捨てる", s:"カス受けマークが点滅したら", steps:[
+    {fig:"front",hl:"tray",arrow:"out",cap:"トレイ（前の受け皿）",t:"電源は入れたまま、トレイを手前に引き出します。",note:"電源を切ってから捨てると、カスの数え直しがされません。"},
+    {fig:"front",hl:"tray",cap:"トレイとカス受け",t:"カス受けのカスを捨て、トレイにたまった水も捨てます。"},
+    {fig:"front",hl:"tray",arrow:"in",cap:"トレイを戻す",t:"10秒ほど待ってから、トレイを奥まで戻します。",note:"すぐ戻すとマークが消えないことがあります。"}]},
+  {id:"frother", freq:"使うたび", t:"ミルクフロッサーの掃除", s:"ミルクを泡立てたあと",steps:[
+    {fig:"front",hl:"frother",cap:"ミルクフロッサー",t:"使ったらすぐ、水を半分入れたジャグにフロッサーの先を入れます。"},
+    {fig:"panel",hl:"steam",cap:"スチームボタン",t:"スチームボタンを押し、予熱が終わる（スチームのランプが点滅に変わる）まで待ちます。"},
+    {fig:"front",hl:"knob",arrow:"turn",cap:"スチームノブ",t:"スチームノブを「I」に回して約10秒スチームを出し、「〇」に戻します。外側は布でふきます。"},
+    {fig:"front",hl:"frother",arrow:"down",cap:"ミルクフロッサー",t:"ときどき分解して洗います。2〜3分冷ましてから、フロッサーを回して外し、中のノズルも下に引いて外します。",note:"使った直後は熱いので、必ず冷めてから触ってください。"},
+    {fig:"front",hl:"frother",cap:"ミルクフロッサー",t:"水で洗い、ノズルの小さな穴はつまようじで通します。ノズル、フロッサーの順に戻します。",p:"p.31"}]},
+  {id:"unit", freq:"月1回", t:"抽出ユニットを洗う", s:"出が悪い・警告マークのとき",steps:[
+    {fig:"panel",hl:"power",cap:"電源ボタン",t:"電源ボタンで電源を切り、背面の主電源スイッチも切ります。",note:"電源が入っていると抽出ユニットは外せません。"},
+    {fig:"front",hl:"tank",arrow:"out",cap:"水タンク",t:"水タンクを手前に引いて外します。"},
+    {fig:"front",hl:"unit",arrow:"out",cap:"抽出ユニットのふた（右側面）",t:"本体の右側面にあるふたを、「PULL」の所に指をかけて開けます。"},
+    {fig:"front",hl:"unit",arrow:"out",cap:"抽出ユニット",t:"赤いボタン2つを内側に押しながら、手前に引き出します。"},
+    {fig:"front",hl:"unit",cap:"抽出ユニット",t:"水だけで洗い流し、よく乾かします。本体の中の粉は付属のブラシで取ります。",note:"ついているグリース（油）を全部落とさないでください。"},
+    {fig:"front",hl:"unit",arrow:"in",cap:"抽出ユニット",t:"元の位置に入れ、「PUSH」を押してカチッと鳴るまではめます。",note:"赤いボタンが押しこまれたままなら、はまっていません。入れ直してください。"},
+    {fig:"front",hl:"tank",arrow:"in",cap:"ふたと水タンク",t:"ふたを閉め、水タンクを戻したら完了です。",p:"p.33〜34"}]},
+  {id:"descale", freq:"ランプ点滅時", t:"石灰を除去する", s:"除石灰ランプが点滅したら・約30分",steps:[
+    {fig:"front",hl:"tank",cap:"水タンク",t:"水タンクに水を入れて電源を入れ、自動の内部洗浄が終わるのを待ちます。"},
+    {fig:"front",hl:"tank",arrow:"out",cap:"水タンク",t:"水タンクを外して空にし、除石灰剤を「A」の線（約100mL）まで、水を「B」の線（約1L）まで入れて戻します。",note:"除石灰剤は、付属していたものか、デロンギ純正品（DLSC200・DLSC500）を使います。酢など別のもので代用しないでください。"},
+    {fig:"front",hl:"frother",cap:"ミルクフロッサーの下",t:"ミルクフロッサーの下に、1.8L以上入る空の容器を置きます。"},
+    {fig:"panel",hl:"clean",cap:"内部洗浄／除石灰ボタン（中央下の丸いボタン）",t:"このボタンを、除石灰ランプがつくまで長押しします。"},
+    {fig:"front",hl:"knob",arrow:"turn",cap:"スチームノブ",t:"スチームノブを「I」に回します。お湯が出たり止まったりしながら、自動で進みます（約20〜25分）。",note:"熱いお湯が出ます。容器に触れないでください。"},
+    {fig:"front",hl:"knob",arrow:"turn",cap:"スチームノブ",t:"水タンクが空になり、除石灰ランプと給水マークが点滅したら、ノブを「〇」に戻します。"},
+    {fig:"front",hl:"tank",arrow:"out",cap:"水タンク",t:"【すすぎ】容器のお湯を捨てて戻し、水タンクをすすいで、きれいな水を「MAX」まで入れて戻します。"},
+    {fig:"front",hl:"knob",arrow:"turn",cap:"スチームノブ",t:"ノブを「I」に回し、タンクの水がなくなるまで待ちます。"},
+    {fig:"front",hl:"knob",arrow:"turn",cap:"スチームノブ",t:"ノブを「〇」に戻します。除石灰ランプと給水マークが消えたら完了です。",note:"消えないときは、すすぎが足りていません。水だけでもう一度行ってください。",p:"p.36〜37"}]},
+  {id:"air", freq:"必要なとき", t:"空気抜き", s:"大きな音がして何も出ないとき",steps:[
+    {fig:"front",hl:"tank",cap:"水タンク",t:"水タンクに水が入っているか確かめます。"},
+    {fig:"front",hl:"frother",cap:"ミルクフロッサーの下",t:"ミルクフロッサーの下にカップ（100mL以上）を置きます。"},
+    {fig:"front",hl:"knob",arrow:"turn",cap:"スチームノブ",t:"スチームノブを「I」に回し、お湯がしっかり出るまで待ちます。",note:"最初は大きな音がしますが、故障ではありません。"},
+    {fig:"front",hl:"knob",arrow:"turn",cap:"スチームノブ",t:"お湯が出たら、ノブを「〇」に戻して完了です。",p:"p.27"}]},
+  {id:"grind", freq:"調整", t:"豆の挽き目を変える", s:"出が遅い・早すぎるとき",steps:[
+    {fig:"front",hl:"hopper",cap:"豆ホッパー（上部）",t:"豆ホッパーのふたを外します。中にグラインダーノブ（目盛りのつまみ）があります。",note:"工場出荷時は目盛り「5」です。ふつうはそのままで大丈夫。豆を替えて出方が変わった時だけ調整します。"},
+    {fig:"panel",hl:"cup1",cap:"コーヒー1杯ボタン",t:"コーヒーを淹れ始め、豆を挽いている音がしている間に回します。",note:"必ずグラインダーが動いている時に回してください。止まっている時に無理に回すと故障の原因になります。"},
+    {fig:"grind",hl:"coarse",cap:"時計回り＝目盛りを大きく＝粗く",t:"出が遅い・ポタポタ・出ない\n→ 時計回りに1目盛り（粗く）"},
+    {fig:"grind",hl:"fine",cap:"反時計回り＝目盛りを小さく＝細かく",t:"出るのが早すぎる・薄い・泡が少ない\n→ 反時計回りに1目盛り（細かく）"},
+    {fig:"front",hl:"spout",cap:"抽出口",t:"1目盛り変えると、2〜3杯かけて少しずつ出方が変わります。それでも早すぎる・遅すぎる時は、もう1目盛り回します。",p:"p.29・別紙「グラインダーノブの調整につきまして」"}]},
+  {id:"amount", freq:"調整", t:"1杯の量を覚えさせる", s:"いつもの量にしたいとき",steps:[
+    {fig:"front",hl:"spout",cap:"抽出口の下",t:"いつも使うカップを抽出口の下に置きます。"},
+    {fig:"panel",hl:"cup1",cap:"コーヒー1杯ボタン",t:"コーヒー1杯ボタンを、ランプが点滅するまで長押しし、指を離します。コーヒーが出始めます。"},
+    {fig:"panel",hl:"cup1",cap:"コーヒー1杯ボタン",t:"好みの量になったら、もう一度同じボタンを押します。この量が次から使われます。",note:"1杯は約20〜180mLの間で設定できます（はじめは約30mL）。",p:"p.26"}]},
+  {id:"away", freq:"旅行の前", t:"しばらく使わないとき", s:"何日も留守にする時・カビ防止",steps:[
+    {fig:"panel",hl:"power",cap:"電源ボタン",t:"電源ボタンで電源を切ります（中の自動すすぎが終わるまで待ちます）。"},
+    {fig:"front",hl:"tank",arrow:"out",cap:"水タンク",t:"水タンクを外して水を捨て、すすいで、ふたを開けたままよく乾かします。",note:"ここからの3つは説明書にはない、カビを防ぐためのひと手間です。"},
+    {fig:"front",hl:"tray",arrow:"out",cap:"トレイとカス受け",t:"トレイを引き出し、カスと水を捨てて洗い、よく乾かしてから戻します。",note:"食器洗い機・食器乾燥機は使わないでください（変形の原因、p.30）。"},
+    {fig:"front",hl:"hopper",cap:"豆ホッパー",t:"豆が残っていたら、使い切るか取り出して袋に入れ、密閉しておくと香りが落ちにくくなります。"},
+    {fig:"front",cap:"本体の背面（主電源スイッチ・プラグ）",t:"背面の主電源スイッチを切り、電源プラグをコンセントから抜きます。",p:"p.3・p.16"},
+    {fig:"front",hl:"spout",cap:"抽出口の下",t:"【戻ってきたら】水タンクに新しい水を入れて電源を入れ、自動すすぎのお湯は捨てます。1杯目の前に、手動の内部洗浄を1回しておくと安心です。",p:"p.15・p.28"}]}
+];
+
+/* ===== 図 ===== */
+const FRONT = {
+  hopper:{r:[56,14,82,18], a:[97,8]},
+  knob:{c:[60,52,9], a:[60,52]},
+  panel:{r:[80,42,100,40]},
+  frother:{r:[30,74,10,100], a:[35,124]},
+  spout:{r:[112,100,36,16], a:[130,108]},
+  tank:{r:[192,36,20,170], a:[202,120]},
+  tray:{r:[48,236,164,32], a:[130,252]},
+  unit:{r:[226,90,22,120], a:[237,150]}
+};
+function arrowSVG(kind, a, part){
+  if(!kind||!a) return "";
+  const [x,y]=a;
+  if(kind==="turn") return `<path class="m-arrow" d="M${x-16} ${y-6} A17 17 0 1 1 ${x+10} ${y+14}"/><path class="m-arrowhead" d="M${x+2} ${y+20} L${x+16} ${y+18} L${x+10} ${y+6} Z"/>`;
+  if(kind==="down") return `<path class="m-arrow" d="M${x+18} ${y-10} V${y+40}"/><path class="m-arrowhead" d="M${x+10} ${y+36} L${x+26} ${y+36} L${x+18} ${y+50} Z"/>`;
+  // out / in : 手前に引く（図では下向き斜め）/ 押し込む
+  const dx = part==="unit"?  (kind==="out"? 1:-1) : 0;
+  if(part==="tray"){ const d = kind==="out"?1:-1; return `<path class="m-arrow" d="M${x} ${y-(d>0?12:-26)} V${y+(d>0?26:-12)}"/><path class="m-arrowhead" d="M${x-8} ${y+(d>0?22:-8)} L${x+8} ${y+(d>0?22:-8)} L${x} ${y+(d>0?34:-20)} Z"/>`;}
+  if(part==="unit"){ return kind==="out"
+    ? `<path class="m-arrow" d="M${x-4} ${y} H${x+10}"/><path class="m-arrowhead" d="M${x+6} ${y-8} L${x+18} ${y} L${x+6} ${y+8} Z"/>`
+    : `<path class="m-arrow" d="M${x+14} ${y} H${x}"/><path class="m-arrowhead" d="M${x+4} ${y-8} L${x-8} ${y} L${x+4} ${y+8} Z"/>`;}
+  // tank
+  return kind==="out"
+    ? `<path class="m-arrow" d="M${x-26} ${y-20} L${x-26} ${y+30}"/><path class="m-arrowhead" d="M${x-34} ${y+26} L${x-18} ${y+26} L${x-26} ${y+40} Z"/>`
+    : `<path class="m-arrow" d="M${x-26} ${y+36} L${x-26} ${y-14}"/><path class="m-arrowhead" d="M${x-34} ${y-10} L${x-18} ${y-10} L${x-26} ${y-24} Z"/>`;
+}
+function shape(p, cls){
+  if(p.c) return `<circle class="${cls}" cx="${p.c[0]}" cy="${p.c[1]}" r="${p.c[2]}"/>`;
+  const [x,y,w,h]=p.r; return `<rect class="${cls}" x="${x}" y="${y}" width="${w}" height="${h}" rx="4"/>`;
+}
+function frontSVG(hl, arrow){
+  const P=FRONT;
+  let s=`<svg viewBox="0 0 260 290" role="img" aria-label="本体を正面から見た簡略図">`;
+  s+=`<rect class="m-body" x="44" y="30" width="170" height="206" rx="12"/>`;
+  s+=`<rect class="m-body" x="44" y="232" width="170" height="40" rx="8"/>`;
+  s+=shape(P.hopper,"m-part")+shape(P.knob,"m-part");
+  s+=`<rect class="m-panel" x="80" y="42" width="100" height="40" rx="4"/>`;
+  s+=`<circle cx="130" cy="62" r="11" fill="#F7F8F8" stroke="#2A2F31" stroke-width="1.5"/>`;
+  [[90,50],[90,66],[160,50],[160,66]].forEach(([x,y])=>s+=`<rect class="m-btn" x="${x}" y="${y}" width="10" height="10" rx="2"/>`);
+  s+=`<path d="M36 64 V74" stroke="var(--mach-line)" stroke-width="3"/>`+shape(P.frother,"m-part");
+  s+=shape(P.spout,"m-part")+`<rect class="m-part" x="118" y="116" width="8" height="10"/><rect class="m-part" x="134" y="116" width="8" height="10"/>`;
+  s+=shape(P.tank,"m-part");
+  s+=`<rect class="m-faint" x="226" y="90" width="22" height="120" rx="4"/><text class="m-txt" x="237" y="226" text-anchor="middle" font-size="11">右側面</text>`;
+  s+=`<g stroke="var(--mach-line)" stroke-width="1.5">${[70,95,120,145,170,195].map(x=>`<line x1="${x}" y1="244" x2="${x+10}" y2="244"/>`).join("")}</g>`;
+  s+=shape(P.tray,"m-faint");
+  if(hl&&P[hl]) s+=shape(P[hl],"m-hl");
+  if(hl==="unit") s+=`<rect class="m-hl" x="226" y="90" width="22" height="120" rx="4"/>`;
+  s+=arrowSVG(arrow, P[hl]&&P[hl].a, hl);
+  return s+`</svg>`;
+}
+function panelSVG(hl){
+  const B={power:[22,18],cup1:[22,58],cup2:[22,98],steam:[196,22],jap1:[196,62],jap2:[196,102]};
+  const L={power:"電源",cup1:"1杯",cup2:"2杯",steam:"スチーム",jap1:"ジャポーネ1",jap2:"ジャポーネ2"};
+  let s=`<svg viewBox="0 0 260 160" role="img" aria-label="操作パネルの簡略図">`;
+  s+=`<rect class="p-face" x="4" y="4" width="252" height="152" rx="10"/>`;
+  s+=`<circle class="p-dial" cx="130" cy="66" r="36"/><text class="p-lbl" x="130" y="70" text-anchor="middle">豆量</text><text class="p-lbl" x="92" y="112" text-anchor="middle" font-size="9">MIN</text><text class="p-lbl" x="170" y="112" text-anchor="middle" font-size="9">MAX</text>`;
+  for(const k in B){ const [x,y]=B[k];
+    s+=`<rect class="${hl===k?'m-hl':'p-btn'}" x="${x}" y="${y}" width="42" height="32" rx="6"/>`;
+    const lx = x<100? x+56: x-8; const anc = x<100?"start":"end";
+    s+=`<text class="p-lbl" x="${lx}" y="${y+21}" text-anchor="${anc}" font-size="10">${L[k]}</text>`; }
+  s+=`<circle class="${hl==='clean'?'m-hl':'p-btn'}" cx="130" cy="130" r="${hl==='clean'?14:11}"/>`;
+  s+=`<text class="p-lbl" x="150" y="134" font-size="9">洗浄/除石灰</text>`;
+  return s+`</svg>`;
+}
+
+function grindSVG(dir){
+  const c=dir==="coarse";
+  let s=`<svg viewBox="0 0 260 200" role="img" aria-label="グラインダーノブの回し方の図">`;
+  s+=`<path class="p-btn" d="M130 22 l-9 -14 h18 z"/>`;
+  s+=`<circle cx="130" cy="100" r="62" fill="#E4E7E8" stroke="var(--mach-line)" stroke-width="3" stroke-dasharray="3 5"/>`;
+  s+=`<circle cx="130" cy="100" r="30" fill="#F7F8F8" stroke="#2A2F31" stroke-width="1.5"/>`;
+  s+=`<text class="p-lbl" x="130" y="54" text-anchor="middle" font-size="14">5</text>`;
+  s+=`<text class="p-lbl" x="100" y="62" text-anchor="middle" font-size="11">小</text><text class="p-lbl" x="160" y="62" text-anchor="middle" font-size="11">大</text>`;
+  s+=`<text class="p-lbl" x="130" y="105" text-anchor="middle" font-size="10">ノブ</text>`;
+  // arrows
+  const cw=`<path class="${c?'m-arrow':'m-faint'}" d="M150 30 A74 74 0 0 1 200 140"/><path class="${c?'m-arrowhead':'p-btn'}" d="M191 138 L206 150 L210 131 Z" ${c?'':'opacity=".25"'}/>`;
+  const ccw=`<path class="${!c?'m-arrow':'m-faint'}" d="M110 30 A74 74 0 0 0 60 140"/><path class="${!c?'m-arrowhead':'p-btn'}" d="M69 138 L54 150 L50 131 Z" ${!c?'':'opacity=".25"'}/>`;
+  s+=cw+ccw;
+  s+=`<text class="m-txt" x="232" y="100" text-anchor="middle" ${c?'':'opacity=".4"'}>粗く</text><text class="m-txt" x="28" y="100" text-anchor="middle" ${!c?'':'opacity=".4"'}>細かく</text>`;
+  s+=`<text class="m-txt" x="130" y="190" text-anchor="middle">1回に1目盛りだけ</text>`;
+  return s+`</svg>`;
+}
+
+/* ===== 説明書PDF ===== */
+const PDF_URL="https://dls.delonghigroup.com/files/pdfmanuals/JP-57132C9004.pdf";
+const PDF_PAGES=43; // 表紙=1ページ目。印刷ページ番号＝PDFのページ位置
+function pageLinks(t){
+  return esc(t).replace(/p\.(\d{1,2})/g,(m,n)=>{ n=+n; return (n>=1&&n<=PDF_PAGES)?`<a class="pglink" data-page="${n}" href="${PDF_URL}#page=${n}" target="_blank" rel="noopener">${m}</a>`:m; });
+}
+const IDB={open(){return new Promise((ok,ng)=>{const r=indexedDB.open("magnifica-guide",1);r.onupgradeneeded=()=>r.result.createObjectStore("f");r.onsuccess=()=>ok(r.result);r.onerror=()=>ng(r.error);});},
+  async get(k){const d=await this.open();return new Promise((ok,ng)=>{const q=d.transaction("f").objectStore("f").get(k);q.onsuccess=()=>ok(q.result);q.onerror=()=>ng(q.error);});},
+  async put(k,v){const d=await this.open();return new Promise((ok,ng)=>{const t=d.transaction("f","readwrite");t.objectStore("f").put(v,k);t.oncomplete=()=>ok();t.onerror=()=>ng(t.error);});},
+  async del(k){const d=await this.open();return new Promise((ok,ng)=>{const t=d.transaction("f","readwrite");t.objectStore("f").delete(k);t.oncomplete=()=>ok();t.onerror=()=>ng(t.error);});}};
+let localPdf=null, pdfDoc=null, pvPage=1, pvZoom=1;
+function setPdfState(){ const st=document.getElementById("pdfState"), rm=document.getElementById("pdfRemove");
+  if(localPdf){ st.textContent="✓ 説明書が入っています。ページ番号を押すと、このアプリの中で開きます。"; st.className="pdfstate ok"; rm.hidden=false; }
+  else { st.textContent="まだ入っていません（ページ番号を押すと公式サイトのPDFが開きます）"; st.className="pdfstate"; rm.hidden=true; } }
+function loadScript(src){return new Promise((ok,ng)=>{const e=document.createElement("script");e.src=src;e.onload=ok;e.onerror=ng;document.head.appendChild(e);});}
+let pdfjsReady=null;
+function pdfjs(){ if(!pdfjsReady) pdfjsReady=(async()=>{
+  const B="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+  await loadScript(B+"pdf.min.js"); await loadScript(B+"pdf.worker.min.js");  // ワーカーは同じページ内で動かす
+  return window.pdfjsLib; })(); return pdfjsReady; }
+async function openPage(n){
+  const pv=document.getElementById("pv"), msg=document.getElementById("pvMsg"), cv=document.getElementById("pvCanvas");
+  pv.hidden=false; document.body.style.overflow="hidden"; pvPage=n; msg.textContent="説明書を開いています…"; cv.hidden=true; updNo();
+  try{
+    const lib=await pdfjs();
+    if(!pdfDoc){ const buf=await localPdf.arrayBuffer(); pdfDoc=await lib.getDocument({data:new Uint8Array(buf)}).promise; }
+    await render();
+  }catch(e){ msg.textContent="このスマホでは表示できませんでした。公式サイトのPDFを開きます。"; setTimeout(()=>{closePv(); window.open(PDF_URL+"#page="+n,"_blank");},1200); }
+}
+function updNo(){ document.getElementById("pvNo").textContent="p."+pvPage+" / "+PDF_PAGES; }
+let rendering=null;
+async function render(){
+  const cv=document.getElementById("pvCanvas"), sc=document.getElementById("pvScroll"), msg=document.getElementById("pvMsg");
+  if(rendering) { try{rendering.cancel()}catch(e){} }
+  const page=await pdfDoc.getPage(pvPage); const v1=page.getViewport({scale:1});
+  const cssW=(sc.clientWidth-24)*pvZoom, scale=cssW/v1.width, dpr=Math.min(window.devicePixelRatio||1,3);
+  const vp=page.getViewport({scale:scale*dpr});
+  cv.width=vp.width; cv.height=vp.height; cv.style.width=cssW+"px"; cv.style.height=(vp.height/dpr)+"px";
+  rendering=page.render({canvasContext:cv.getContext("2d"),viewport:vp});
+  try{ await rendering.promise; }catch(e){ return; }
+  msg.textContent=""; cv.hidden=false; updNo();
+}
+function closePv(){ document.getElementById("pv").hidden=true; document.body.style.overflow=""; }
+document.getElementById("pvClose").onclick=closePv;
+document.getElementById("pvPrev").onclick=()=>{ if(pvPage>1){pvPage--; render(); document.getElementById("pvScroll").scrollTop=0;} };
+document.getElementById("pvNext").onclick=()=>{ if(pvPage<PDF_PAGES){pvPage++; render(); document.getElementById("pvScroll").scrollTop=0;} };
+document.getElementById("pvIn").onclick=()=>{ pvZoom=Math.min(pvZoom*1.4,4); render(); };
+document.getElementById("pvOut").onclick=()=>{ pvZoom=Math.max(pvZoom/1.4,1); render(); };
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!document.getElementById("pv").hidden) closePv(); });
+document.addEventListener("click",e=>{
+  const a=e.target.closest("a.pglink"); if(!a) return;
+  const n=+a.dataset.page;
+  if(localPdf){ e.preventDefault(); openPage(n); }
+  else if(a.getAttribute("href")==="#"){ e.preventDefault(); window.open(PDF_URL+"#page="+n,"_blank","noopener"); }
+});
+document.querySelectorAll('.setlist a.pglink').forEach(a=>{a.href=PDF_URL+"#page="+a.dataset.page; a.target="_blank"; a.rel="noopener";});
+document.getElementById("pdfFile").addEventListener("change",async e=>{
+  const f=e.target.files[0]; e.target.value=""; if(!f) return;
+  const head=new Uint8Array(await f.slice(0,5).arrayBuffer());
+  if(String.fromCharCode(...head)!=="%PDF-"){ document.getElementById("pdfState").textContent="PDFではないファイルのようです。説明書のPDFを選んでください。"; return; }
+  localPdf=f; pdfDoc=null;
+  try{ await IDB.put("manual",f); }catch(err){ /* 保存できない環境では、このページを開いている間だけ使う */ }
+  setPdfState();
+});
+document.getElementById("pdfRemove").onclick=async()=>{ localPdf=null; pdfDoc=null; try{await IDB.del("manual");}catch(e){} setPdfState(); };
+(async()=>{ try{ const f=await IDB.get("manual"); if(f) localPdf=f; }catch(e){} setPdfState(); })();
+
+/* ===== UI ===== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function showTab(id){
+  document.querySelectorAll(".tab").forEach(b=>{
+    const on=b.id==="t-"+id; b.setAttribute("aria-selected",on);
+    document.getElementById(b.getAttribute("aria-controls")).hidden=!on;
+  });
+  try{localStorage.setItem("mg-tab",id)}catch(e){}
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{showTab(b.id.slice(2));window.scrollTo({top:0})}));
+
+function causeHTML(c){
+  return `<div class="cause">${c.when?`<span class="when">${esc(c.when)}</span>`:""}
+    <span class="do">${esc(c.do)} <span class="pg">${pageLinks(c.p||"")}</span></span>
+    ${c.note?`<span class="fine">${esc(c.note)}</span>`:""}
+    ${c.guide?`<button class="jump" data-guide="${c.guide}">図で手順を見る →</button>`:""}</div>`;
+}
+document.addEventListener("click",e=>{
+  const j=e.target.closest("[data-guide]"); if(!j) return;
+  showTab("care"); openGuide(j.dataset.guide); $("#viewer").scrollIntoView({behavior:"smooth",block:"start"});
+});
+
+// Lamps
+function iconsHTML(k){
+  return k.map(([id,st],n)=>(n?'<span class="plus">＋</span>':'')+`<span class="ic ${st}"><span class="tile"><svg viewBox="0 0 44 44" aria-hidden="true">${ICONS[id].svg}</svg></span><span>${st==="on"?"点灯":"点滅"}</span></span>`).join("");
+}
+function patLabel(k){return k.map(([id,st])=>ICONS[id].name+"が"+(st==="on"?"点灯":"点滅")).join("、");}
+$("#pats").innerHTML = PATTERNS.map((p,n)=>`<details class="pat" id="pat${n}"><summary aria-label="${esc(patLabel(p.k))}"><div class="icons">${iconsHTML(p.k)}</div><div class="pwhat">${esc(p.what)}</div></summary>
+  <div class="pbody"><span class="fine">${esc(patLabel(p.k))}</span>${p.causes.map(causeHTML).join("")}
+  <button class="jump" data-ask="${esc(patLabel(p.k))}しています。">AIにくわしく聞く →</button></div></details>`).join("")
+  + `<details class="pat"><summary><div class="pwhat">どれにも当てはまらない</div></summary><div class="pbody">
+     <p>光っているマークの写真を撮って「AIに聞く」で送ってください。どのマークが、ついているかチカチカかを書き添えると、答えやすくなります。</p>
+     <p class="fine">電源ボタンの横や各ボタンの横のランプの点滅は、予熱中・内部洗浄中などのふつうの動作です。しばらく待ってみてください。</p>
+     <button class="jump" data-ask="ランプが光っていますが、どれに当てはまるかわかりません。">AIに聞く →</button></div></details>`;
+$("#pats").addEventListener("toggle",e=>{ if(e.target.open) document.querySelectorAll("details.pat").forEach(d=>{ if(d!==e.target) d.open=false; }); },true);
+
+// Symptoms
+let lastG="";
+$("#syms").innerHTML = SYMPTOMS.map(s=>{
+  const head = s.g!==lastG? `<div class="grp">${esc(s.g)}</div>`:""; lastG=s.g;
+  return head+`<details class="sym"><summary>${esc(s.t)}</summary><div class="body">${s.c.map(causeHTML).join("")}</div></details>`;
+}).join("");
+
+// Guides
+$("#glist").innerHTML = GUIDES.map(g=>`<button class="gbtn" data-g="${g.id}" aria-pressed="false"><span class="freq">${esc(g.freq)}</span><b>${esc(g.t)}</b><span>${esc(g.s)}</span></button>`).join("");
+$("#glist").addEventListener("click",e=>{const b=e.target.closest(".gbtn"); if(b){openGuide(b.dataset.g); $("#viewer").scrollIntoView({behavior:"smooth",block:"start"});}});
+let cur=null, idx=0;
+function openGuide(id){ cur=GUIDES.find(g=>g.id===id); idx=0;
+  document.querySelectorAll(".gbtn").forEach(b=>b.setAttribute("aria-pressed",b.dataset.g===id));
+  renderStep(); }
+function renderStep(){
+  const v=$("#viewer"); v.hidden=false; const st=cur.steps[idx], n=cur.steps.length;
+  const fig = st.fig==="panel"? panelSVG(st.hl) : st.fig==="grind"? grindSVG(st.hl) : frontSVG(st.hl, st.arrow);
+  v.innerHTML=`<div class="vtop"><h3>${esc(cur.t)}</h3><span class="count">${idx+1} / ${n}</span></div>
+    <div class="progress">${cur.steps.map((_,i)=>`<i class="${i<=idx?'on':''}"></i>`).join("")}</div>
+    <div class="stage"><div class="fig">${fig}<span class="cap">${st.fig==="grind"||!st.hl?"":"光っている所："}${esc(st.cap)}</span></div>
+      <div><p class="stext" style="white-space:pre-line">${esc(st.t)}</p>${st.note?`<p class="note ${/熱|壊|故障/.test(st.note)?'warn':''}">${esc(st.note)}</p>`:""}${st.p?`<p class="pg" style="margin-top:8px">説明書 ${pageLinks(st.p)}</p>`:""}</div></div>
+    <div class="nav"><button class="nbtn" id="prev" ${idx===0?"disabled":""}>← 戻る</button>
+      <button class="nbtn pri" id="next">${idx===n-1?"おわり ✓":"次へ →"}</button></div>`;
+  $("#prev").onclick=()=>{if(idx>0){idx--;renderStep();}};
+  $("#next").onclick=()=>{ if(idx<n-1){idx++;renderStep();} else { v.innerHTML=`<div class="vtop"><h3>${esc(cur.t)}</h3></div><p class="stext" style="color:var(--ok)">✓ おつかれさまでした。完了です。</p><div class="nav"><button class="nbtn" id="again">もう一度見る</button><button class="nbtn pri" id="close">閉じる</button></div>`;
+      $("#again").onclick=()=>{idx=0;renderStep();}; $("#close").onclick=()=>{v.hidden=true;document.querySelectorAll(".gbtn").forEach(b=>b.setAttribute("aria-pressed",false));}; } };
+}
+
+/* ===== AI ===== */
+function knowledge(){
+  const L=PATTERNS.map(p=>`■${patLabel(p.k)}（これ以外のマークは消えている）→ ${p.what}\n${p.causes.map(c=>`  - ${c.when?c.when+"：":""}${c.do}（${c.p}）`).join("\n")}`).join("\n");
+  const S=SYMPTOMS.map(s=>`■${s.t}\n${s.c.map(c=>`  - ${c.when?c.when+"：":""}${c.do}（${c.p}）`).join("\n")}`).join("\n");
+  const G=GUIDES.map(g=>`■${g.t}（${g.s}）\n${g.steps.map((s,i)=>`  ${i+1}. ${s.t.replace(/\n/g," ")}${s.note?"（注意："+s.note+"）":""}`).join("\n")}`).join("\n");
+  return `【機種】デロンギ マグニフィカS 全自動コーヒーマシン ECAM22112（日本向け家庭用）
+【操作パネル】左列：電源ボタン、コーヒー1杯、コーヒー2杯。中央：豆量調節つまみ（MIN〜MAX。MINを越えてスプーンの位置まで回すと粉コーヒーモード。粉は1杯のみ）。右列：スチームボタン、カフェ・ジャポーネ1杯、カフェ・ジャポーネ2杯。中央下：内部洗浄／除石灰ボタン。表示：給水マーク、カス受けマーク、警告マーク、除石灰ランプ、ECOマーク、各ボタン横のランプ。
+【各部】上部：豆ホッパー（中にグラインダーノブ）、粉投入口。左上：スチームノブ（〇＝閉、I＝開）。左側：ミルクフロッサー。中央：高さを変えられる抽出口。右前：水タンク（手前に引いて外す、1.8L）。右側面：抽出ユニットのふた。前下：トレイとカス受け（約20杯分）。背面：主電源スイッチ。
+【仕様】100V 1450W、ポンプ15気圧、コーン式グラインダー、豆ホッパー250g。1杯の量は約20〜180mL（初期約30mL）、2杯は約40〜360mL。
+【設定と説明書のページ】1杯の量・水の硬さ＝p.26、抽出温度・お湯を出す・カップを温める＝p.27、手動内部洗浄・自動電源オフ（15分／30分／1時間／2時間／3時間）＝p.28、節電モード・豆の挽き目＝p.29。いずれも主電源「入」で電源を切った状態からボタンを長押しして設定に入る。細かいボタン操作とランプの見え方は資料にないので、推測せず「説明書のp.28」のように正確なページ番号を1つ示して、そのページを見るよう案内すること（このアプリではページ番号を押すと説明書のそのページが開く）。
+【ランプ表示】マークは4つ：給水マーク（水差しの形）、カス受けマーク（点の入った容器）、警告マーク（三角に！）、除石灰ランプ。組み合わせで意味が決まる（別紙クイックガイドより）。電源ボタン横などのランプの点滅は予熱・洗浄中のふつうの動作。
+${L}
+【症状と対処】
+${S}
+【手順】
+${G}
+【カフェ・ジャポーネ】ハンドドリップのように「浸透→蒸らし→抽出」を3回くり返して間欠抽出する、日本人好みのすっきりしたコーヒー（p.6）。
+【グラインダーノブ】豆ホッパー内。工場出荷時は目盛り「5」。時計回り＝目盛りを大きく＝粗く、反時計回り＝小さく＝細かく。1目盛り変えると2〜3杯で徐々に変わる。必ずグラインダー作動中に回す（別紙）。
+【水】水道水か軟水（硬度90mg/L以下）のミネラルウォーター。硬水は詰まりや故障の原因。ミネラルウォーターや浄水器の水を使うなら週1回、水道水で内部洗浄を数回（p.7・p.35）。
+【洗えないもの】本体表面、電源プラグ・コード、抽出口（固くしぼった布でふき、詰まりはつまようじ）。抽出ユニットは洗剤・食洗機・浸け置き不可。部品は食器洗い機・乾燥機不可（p.30・p.33・p.35）。
+【問い合わせ】デロンギ お客様サポートセンター 0120-804-280（土日祝除く9:30〜18:00）`;
+}
+const RULES = `あなたは、デロンギ マグニフィカS（ECAM22112）の使い方とトラブルを、年配の持ち主にやさしく教える案内役です。
+次の【資料】は、この機種の取扱説明書を要約したものです。答えは必ずこの資料にもとづいてください。
+・日本語で、短い文で、専門用語をさけて答える。
+・手順は「1. 2. 3.」の番号つきで、1行に1つの動作だけ書く。
+・マークダウンの記号（**や#）は使わない。
+・参照ページは「p.36」の形（pと数字の間にピリオド、範囲ではなく1ページ）で必ず添える。このアプリではページ番号を押すと説明書のそのページが開く。
+・資料にないことは推測で断定せず「説明書のp.○○を見てください」または「サポートセンターに電話してください」と伝える。
+・熱湯、やけど、分解、電気に関わることは安全を最優先し、無理をしないよう伝える。
+・写真が送られたら、どのランプが光っているか、どの部品かを読み取ってから答える。読み取れないときは、その旨を正直に伝えて聞き返す。
+・状況がはっきりしないときは、答えの最後に確認の質問を1つだけする。
+
+【資料】
+${knowledge()}`;
+
+let sample=null, turns=[], ctl=null, pendingImg=null;
+const chat=$("#chat");
+function addMsg(role,text,img){
+  const d=document.createElement("div"); d.className="msg "+role;
+  if(img){const i=document.createElement("img"); i.src=URL.createObjectURL(img); i.alt="送った写真"; d.appendChild(i);}
+  const t=document.createElement("span"); t.textContent=text; d.appendChild(t);
+  chat.appendChild(d); return t;
+}
+function clean(t){return t.replace(/\*\*/g,"").replace(/^#+\s*/gm,"");}
+function greet(){ chat.innerHTML=""; addMsg("ai","こんにちは。コーヒーマシンで困っていることを教えてください。ランプの色や光り方、音、いつから起きたかなど、わかる範囲で書いてもらえると答えやすくなります。"); }
+greet();
+const CHIPS=["ランプがチカチカしている","コーヒーが薄い","ポタポタとしか出ない","ミルクが泡立たない","石灰除去のやり方を教えて"];
+$("#chips").innerHTML=CHIPS.map(c=>`<button type="button" class="chip">${esc(c)}</button>`).join("");
+$("#chips").addEventListener("click",e=>{const b=e.target.closest(".chip"); if(b){$("#q").value=b.textContent; $("#q").focus();}});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-ask]"); if(!b) return; e.stopPropagation(); showTab("ai"); $("#q").value=b.dataset.ask+" どうすればいいですか？"; $("#q").focus();},true);
+
+$("#pic").addEventListener("change",e=>{pendingImg=e.target.files[0]||null; $("#picName").textContent=pendingImg?"写真を1枚つけました":"";});
+$("#reset").onclick=()=>{ctl?.abort(); turns=[]; greet();};
+$("#stop").onclick=()=>ctl?.abort();
+
+$("#composer").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const q=$("#q").value.trim(); if(!q&&!pendingImg) return;
+  if(!sample){ $("#aiOn").hidden=true; $("#aiOff").hidden=false; return; }
+  const img=pendingImg; pendingImg=null; $("#pic").value=""; $("#picName").textContent="";
+  const text = q || "この写真を見て、どういう状態か教えてください。";
+  addMsg("me",text,img); $("#q").value="";
+  turns.push({role:"user",content: img? text+"\n（写真を1枚添付しています）" : text});
+  const out=addMsg("ai","考えています…"); out.parentElement.classList.add("wait");
+  out.parentElement.scrollIntoView({behavior:"smooth",block:"nearest"});
+  ctl=new AbortController(); $("#send").disabled=true; $("#stop").hidden=false;
+  try{
+    const recent=turns.slice(-12);
+    const {text:ans,truncated}=await sample([{role:"user",content:RULES},...recent],{
+      cache:false, signal:ctl.signal, ...(img?{images:img}:{}),
+      onText:({text})=>{out.parentElement.classList.remove("wait"); out.textContent=clean(text);} });
+    out.innerHTML=pageLinks(clean(ans)+(truncated?"\n\n（答えが長すぎて途中で切れました。もう少し細かく聞いてみてください）":""));
+    turns.push({role:"assistant",content:ans});
+  }catch(err){
+    out.parentElement.classList.remove("wait");
+    const keep=err.text?clean(err.text)+"\n\n":"";
+    const msg={cancelled:"（止めました）",not_granted:"AIの利用が許可されていないため使えません。ほかのタブで調べてください。",sampling_disabled:"このアカウントではAIを使えません。",rate_limited:"いま混み合っています。少し時間をおいてから、もう一度送ってください。",session_expired:"ログインが切れました。Claudeにログインし直してください。",image_rejected:"この写真は送れませんでした。別の写真で試してください。",images_unavailable:"この画面では写真を送れません。文字だけで送ってください。",refused:"この内容には答えられませんでした。聞き方を変えてみてください。"}[err.code]||"うまくつながりませんでした。もう一度送ってください。";
+    out.textContent=keep+msg;
+    if(err.code==="not_granted"||err.code==="sampling_disabled"){ $("#aiOn").hidden=true; $("#aiOff").hidden=false; }
+    if(err.code==="images_unavailable") $("#photoRow").hidden=true;
+    turns.pop();
+  }finally{ $("#send").disabled=false; $("#stop").hidden=true; ctl=null; }
+});
+
+function aiFallback(){ $("#aiOn").hidden=true; $("#aiOff").hidden=false; }
+document.addEventListener("click",e=>{const b=e.target.closest("[data-ask]"); if(b&&$("#aiOn").hidden){ $("#q2").value=b.dataset.ask+" どうすればいいですか？"; }},true);
+$("#copyAsk").onclick=async()=>{
+  const q=$("#q2").value.trim()||"（ここに困っていることを書いてください）";
+  const text=RULES+"\n\n【質問】\n"+q;
+  const box=$("#copyBox"); box.value=text;
+  try{ await navigator.clipboard.writeText(text); $("#copyMsg").textContent="コピーしました。AIアプリを開いて、入力欄を長押しして「ペースト」してください。"; box.hidden=true; }
+  catch(err){ box.hidden=false; box.focus(); box.select(); $("#copyMsg").textContent="自動でコピーできませんでした。下の文章を長押しして全部選び、コピーしてください。"; }
+};
+(async()=>{
+  try{
+    sample = window.claude? await window.claude.use("sample") : null;
+    if(!sample){ aiFallback(); return; }
+    const caps=await sample.limits().catch(()=>null);
+    if(caps&&caps.images){ $("#photoRow").hidden=false; $("#pic").accept=caps.images.mediaTypes.join(","); }
+  }catch(e){ aiFallback(); }
+})();
+
+// 最後に見たタブ（#lamp など）
+(function(){ const h=location.hash.slice(1); let t=["lamp","sym","care","ai"].includes(h)?h:null;
+  if(!t){ try{t=localStorage.getItem("mg-tab")}catch(e){} }
+  if(t&&["lamp","sym","care","ai"].includes(t)) showTab(t); })();
+</script>
+
+</body>
+</html>
