@@ -171,6 +171,29 @@ a.pglink{color:var(--brew);font-weight:700;text-decoration:underline;text-underl
 .machine-tip{border:2px solid var(--brew);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
 .machine-tip ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
 
+/* Splash */
+.splash{position:fixed;inset:0;z-index:100;background:#2B1B12;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  animation:splashOut .5s ease 2.3s forwards}
+.splash svg{width:min(56vw,220px);height:auto}
+.splash .sname{font-family:var(--f-display);color:#F4EEE8;font-size:1.5rem;letter-spacing:.04em;opacity:0;animation:fadeUp .6s ease 1.2s forwards}
+.splash .ssub{color:#C9A88D;font-size:.85rem;letter-spacing:.12em;opacity:0;animation:fadeUp .6s ease 1.45s forwards;margin-top:-10px}
+.splash .stream{stroke:#9A6440;stroke-width:5;stroke-linecap:round;stroke-dasharray:60;stroke-dashoffset:60;animation:pour 1.3s linear .2s forwards}
+.splash .fill{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);animation:rise 1.1s ease-out .45s forwards}
+.splash .crema{opacity:0;animation:fadeIn .4s ease 1.4s forwards}
+.splash .steam{stroke:#E9DCCF;stroke-width:3;fill:none;stroke-linecap:round;opacity:0;animation:steam 1.6s ease-in-out 1.2s infinite}
+.splash .steam.s2{animation-delay:1.45s}.splash .steam.s3{animation-delay:1.7s}
+@keyframes pour{0%{stroke-dashoffset:60}70%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:-60;opacity:0}}
+@keyframes rise{to{transform:scaleY(1)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes steam{0%{opacity:0;transform:translateY(6px)}40%{opacity:.85}100%{opacity:0;transform:translateY(-14px)}}
+@keyframes splashOut{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){
+  .splash{animation:splashOut .4s ease 1s forwards}
+  .splash *{animation:none!important;opacity:1!important;transform:none!important;stroke-dashoffset:0!important}
+  .splash .stream{opacity:0!important}
+}
+
 /* AI */
 .chat{display:flex;flex-direction:column;gap:12px}
 .msg{padding:12px 14px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;max-width:92%}
@@ -205,6 +228,27 @@ footer{margin-top:28px;font-size:.85rem;color:var(--muted);display:flex;flex-dir
 </head>
 <body>
 
+<div class="splash" id="splash" aria-hidden="true">
+  <svg viewBox="0 0 200 200">
+    <rect x="62" y="6" width="76" height="22" rx="5" fill="#4A2C1D"/>
+    <rect x="80" y="28" width="40" height="12" rx="3" fill="#5E3A27"/>
+    <rect x="86" y="40" width="8" height="8" fill="#5E3A27"/><rect x="106" y="40" width="8" height="8" fill="#5E3A27"/>
+    <path class="stream" d="M90 50 V118"/><path class="stream" d="M110 50 V118" style="animation-delay:.3s"/>
+    <path class="steam" d="M84 112 q-6 -8 0 -16 q6 -8 0 -16"/>
+    <path class="steam s2" d="M100 108 q-6 -8 0 -16 q6 -8 0 -16"/>
+    <path class="steam s3" d="M116 112 q-6 -8 0 -16 q6 -8 0 -16"/>
+    <path d="M150 132 a16 16 0 0 1 0 32 h-8" fill="none" stroke="#F4EEE8" stroke-width="7"/>
+    <path d="M52 120 h100 v34 a26 26 0 0 1 -26 26 h-48 a26 26 0 0 1 -26 -26 z" fill="#F4EEE8"/>
+    <clipPath id="cupIn"><path d="M58 124 h88 v30 a22 22 0 0 1 -22 22 h-44 a22 22 0 0 1 -22 -22 z"/></clipPath>
+    <g clip-path="url(#cupIn)">
+      <rect class="fill" x="58" y="128" width="88" height="48" fill="#4A2C1D"/>
+      <ellipse class="crema" cx="102" cy="130" rx="42" ry="5" fill="#C98B4E"/>
+    </g>
+    <rect x="34" y="184" width="132" height="8" rx="4" fill="#E8A317"/>
+  </svg>
+  <div class="sname">マグニフィカS お助け帳</div>
+  <div class="ssub">MAGNIFICA S GUIDE</div>
+</div>
 <div class="wrap">
   <header class="head">
     <span class="model">デロンギ 全自動コーヒーマシン ECAM22112</span>
@@ -253,8 +297,8 @@ footer{margin-top:28px;font-size:.85rem;color:var(--muted);display:flex;flex-dir
     </div>
     <div class="glist" id="glist"></div>
     <div class="viewer" id="viewer" hidden></div>
-    <div class="card beans" id="beans">
-      <h3>コーヒー豆の保存</h3>
+    <div class="card beans" id="beans" hidden>
+      <div class="vtop"><h3>コーヒー豆の保存</h3><button type="button" class="jump" id="beansClose">閉じる</button></div>
       <p>豆の味を落とす原因は4つです。これを避けるのが基本です。</p>
       <div class="enemies"><div>空気<small>酸化</small></div><div>光<small>日光・照明</small></div><div>熱<small>高温</small></div><div>湿気<small>結露も</small></div></div>
       <p>おすすめは、<b>買ったときの袋のまま、空気を抜いて口を閉じ、密閉容器（キャニスターやチャック付き袋など）に入れる</b>方法です。アルミ張りの袋なら光と湿気を防げるので、二重に守れます。紙だけの袋の場合は、遮光できる容器に移してください。</p>
@@ -716,10 +760,15 @@ $("#syms").innerHTML = SYMPTOMS.map(s=>{
 // Guides
 $("#glist").innerHTML = GUIDES.map(g=>`<button class="gbtn" data-g="${g.id}" aria-pressed="false"><span class="freq">${esc(g.freq)}</span><b>${esc(g.t)}</b><span>${esc(g.s)}</span></button>`).join("");
 $("#glist").insertAdjacentHTML("beforeend",`<button class="gbtn" id="toBeans" type="button"><span class="freq">豆</span><b>コーヒー豆の保存</b><span>おいしさを長く保つには</span></button>`);
-document.getElementById("toBeans").onclick=e=>{e.stopPropagation(); document.getElementById("beans").scrollIntoView({behavior:"smooth",block:"start"});};
+document.getElementById("toBeans").onclick=e=>{ e.stopPropagation();
+  const bx=document.getElementById("beans"), open=bx.hidden;
+  $("#viewer").hidden=true; document.querySelectorAll(".gbtn").forEach(b=>b.setAttribute("aria-pressed",false));
+  bx.hidden=!open; e.currentTarget.setAttribute("aria-pressed",open);
+  if(open) bx.scrollIntoView({behavior:"smooth",block:"start"}); };
+document.getElementById("beansClose").onclick=()=>{ document.getElementById("beans").hidden=true; document.getElementById("toBeans").setAttribute("aria-pressed",false); document.getElementById("toBeans").scrollIntoView({behavior:"smooth",block:"center"}); };
 $("#glist").addEventListener("click",e=>{const b=e.target.closest(".gbtn"); if(b){openGuide(b.dataset.g); $("#viewer").scrollIntoView({behavior:"smooth",block:"start"});}});
 let cur=null, idx=0;
-function openGuide(id){ cur=GUIDES.find(g=>g.id===id); idx=0;
+function openGuide(id){ cur=GUIDES.find(g=>g.id===id); idx=0; document.getElementById("beans").hidden=true;
   document.querySelectorAll(".gbtn").forEach(b=>b.setAttribute("aria-pressed",b.dataset.g===id));
   renderStep(); }
 function renderStep(){
@@ -839,6 +888,13 @@ $("#copyAsk").onclick=async()=>{
     if(caps&&caps.images){ $("#photoRow").hidden=false; $("#pic").accept=caps.images.mediaTypes.join(","); }
   }catch(e){ aiFallback(); }
 })();
+
+// 起動画面：アニメが終わったら取り除く（タップで飛ばせる）
+(function(){ const sp=document.getElementById("splash"); if(!sp) return;
+  const done=()=>{ sp.remove(); };
+  sp.addEventListener("click",()=>{ sp.style.animation="splashOut .25s ease forwards"; setTimeout(done,260); });
+  sp.addEventListener("animationend",e=>{ if(e.target===sp) done(); });
+  setTimeout(()=>{ if(document.body.contains(sp)) done(); },4000); })();
 
 // 最後に見たタブ（#lamp など）
 (function(){ const h=location.hash.slice(1); let t=["lamp","sym","care","ai"].includes(h)?h:null;
